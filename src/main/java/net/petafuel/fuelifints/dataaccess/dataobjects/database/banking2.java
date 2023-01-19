@@ -24,6 +24,7 @@ import javax.naming.NamingException;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.sql.*;
 import java.text.ParseException;
@@ -71,15 +72,15 @@ public class banking2 {
     private static final String seed = "412132343421";
     private static final Logger LOG = LogManager.getLogger(banking2.class);
     public static SimpleDateFormat sdf_sql = new SimpleDateFormat("yyyy-MM-dd");
-    private static SimpleDateFormat sdf_tan = new SimpleDateFormat("yyyyMMddHHmmss");
+    private static final SimpleDateFormat sdf_tan = new SimpleDateFormat("yyyyMMddHHmmss");
     private static String dbprofile = "banking2";
     private CkontoLocal ckonto;
-    private Charset charsetISO88591 = Charset.forName("ISO-8859-1");
-    private Properties configuration;
-    private SecureRandom random = new SecureRandom();
+    private final Charset charsetISO88591 = StandardCharsets.ISO_8859_1;
+    private final Properties configuration;
+    private final SecureRandom random = new SecureRandom();
     private boolean configCreateVorabumsaetze = false;
-    private HashMap<String, List<BankMessageObject>> localMessageList = new HashMap<>();
-    private HashMap<String, String> localUserReference = new HashMap<>();
+    private final HashMap<String, List<BankMessageObject>> localMessageList = new HashMap<>();
+    private final HashMap<String, String> localUserReference = new HashMap<>();
     private Boolean mailAvaible = null;
 
     /**
@@ -409,7 +410,7 @@ public class banking2 {
         for (byte b : auftragsHashwert) {
             checksum += Math.abs(b);
         }
-        LOG.info(addTagUser(format("checksum: %s, Auftragsreferenz: %s", String.valueOf(checksum), (checksum % 1000000)), legitimationInfo));
+        LOG.info(addTagUser(format("checksum: %s, Auftragsreferenz: %s", checksum, (checksum % 1000000)), legitimationInfo));
         return "" + (checksum % 1000000);
     }
 
@@ -744,10 +745,10 @@ public class banking2 {
                 umsatznummer++;
                 found = true;
             }
-            LOG.info(addTagUser(format("gefundene Vorabumsätze: %s", String.valueOf(umsatznummer)), legitimationInfo));
+            LOG.info(addTagUser(format("gefundene Vorabumsätze: %s", umsatznummer), legitimationInfo));
             new DbHelper().closeQuietly(resultSet);
             if (found) {
-                returnBytes = writer.write().getBytes(charsetISO88591);
+                returnBytes = writer.write().getBytes(String.valueOf(charsetISO88591));
             }
         } catch (SQLException e) {
             LOG.warn(addTagUser(format("Fehler beim Holen der Vorabumsätze: %s", e.getMessage()), legitimationInfo), e);
@@ -1996,7 +1997,10 @@ public class banking2 {
         int len = parseInt(config(properties.tanLen, "6"));
         try {
 
-            String mTan = generateTan(len);
+            // FIXME: set fixed mTan
+            //String mTan = generateTan(len);
+            String mTan = "123456";
+
             connection = getConnection();
             PreparedStatement pS = connection.prepareStatement(sql.tanliste.mobil.insert, Statement.RETURN_GENERATED_KEYS);
             pS.setString(1, AESUtil.aesEncrypt((mTan.getBytes())));
@@ -2005,17 +2009,19 @@ public class banking2 {
             pS.execute();
             ResultSet resultSet = pS.getGeneratedKeys();
             if (resultSet.next()) {
-                sms.status smsStatus = sendTan(legitimationInfo, "Ihre mTAN für Ihren HBCI-Auftrag lautet wie folgt:" + mTan);
-                switch (smsStatus) {
-                    case okay:
-                    case queued:
-                        LOG.info(addTagUser("mtanid:" + resultSet.getLong(1), legitimationInfo));
-                        returnLong = resultSet.getLong(1);
-                        break;
-                    case fail:
-                        LOG.info(addTagUser("mTan konnte nicht gesendet werden", legitimationInfo));
-                        break;
-                }
+                // FIXME: sending sms disabled
+                return resultSet.getLong(1);
+//                sms.status smsStatus = sendTan(legitimationInfo, "Ihre mTAN für Ihren HBCI-Auftrag lautet wie folgt:" + mTan);
+//                switch (smsStatus) {
+//                    case okay:
+//                    case queued:
+//                        LOG.info(addTagUser("mtanid:" + resultSet.getLong(1), legitimationInfo));
+//                        returnLong = resultSet.getLong(1);
+//                        break;
+//                    case fail:
+//                        LOG.info(addTagUser("mTan konnte nicht gesendet werden", legitimationInfo));
+//                        break;
+//                }
             } else {
                 LOG.warn(addTagUser("Fehler beim anlegen einer Mobile-TAN", legitimationInfo), new Throwable());
             }
@@ -2132,7 +2138,7 @@ public class banking2 {
             returnBoolean = true;
             LOG.info(addTagUser("Schlüssel erfolgreich in Datenbank geschrieben für Kennung", userId, ""));
         } catch (SQLException e) {
-            LOG.warn(addTagUser(format("Fehler beim Speichern des PublicKeys Kennung/Art/Version/Nummer: %s/%s/%s", String.valueOf(art), String.valueOf(version), String.valueOf(nummer)), userId, ""), e);
+            LOG.warn(addTagUser(format("Fehler beim Speichern des PublicKeys Kennung/Art/Version/Nummer: %s/%s/%s", art, version, nummer), userId, ""), e);
         } finally {
             new DbHelper().closeQuietly(connection);
         }
@@ -2207,7 +2213,7 @@ public class banking2 {
                 returnString = new String(Base64.encode(returnBytes));
                 LOG.info(addTagUser("Schlüssel gefunden für Kennung", userId, ""));
             } else {
-                LOG.info(addTagUser(format("Angefragten Schlüssel nicht gefunden für Art/Version/Nummer: %s/%s/%s", String.valueOf(schluesselArt), String.valueOf(schluesselVersion), String.valueOf(schluesselNummer)), userId, ""));
+                LOG.info(addTagUser(format("Angefragten Schlüssel nicht gefunden für Art/Version/Nummer: %s/%s/%s", schluesselArt, schluesselVersion, schluesselNummer), userId, ""));
             }
             new DbHelper().closeQuietly(resultSet);
         } catch (SQLException e) {

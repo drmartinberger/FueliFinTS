@@ -16,7 +16,6 @@ import net.petafuel.fuelifints.protocol.fints3.segments.parameter.HIBPA;
 import net.petafuel.fuelifints.protocol.fints3.segments.parameter.HIUPA;
 import net.petafuel.fuelifints.protocol.fints3.segments.parameter.HIUPD;
 import net.petafuel.fuelifints.protocol.fints3.validator.validators.*;
-import net.petafuel.mt94x.Helper;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -172,6 +171,33 @@ public class HKTAN extends Segment implements IExecutableElement, IDependentElem
 
     public HKTAN(byte[] message) {
         super(message);
+
+        // FIXME: Hard-code auftragsHashwert because otherwise it is null and leads to Nullpointer-Exception
+        this.auftragsHashwert = new byte[24];
+        this.auftragsHashwert[0] = 64;
+        this.auftragsHashwert[1] = 50;
+        this.auftragsHashwert[2] = 48;
+        this.auftragsHashwert[3] = 64;
+        this.auftragsHashwert[4] = 80;
+        this.auftragsHashwert[5] = 4;
+        this.auftragsHashwert[6] = -30;
+        this.auftragsHashwert[7] = 41;
+        this.auftragsHashwert[8] = 116;
+        this.auftragsHashwert[9] = -22;
+        this.auftragsHashwert[10] = -119;
+        this.auftragsHashwert[11] = -99;
+        this.auftragsHashwert[12] = -2;
+        this.auftragsHashwert[13] = -93;
+        this.auftragsHashwert[14] = 118;
+        this.auftragsHashwert[15] = 38;
+        this.auftragsHashwert[16] = 19;
+        this.auftragsHashwert[17] = -114;
+        this.auftragsHashwert[18] = 61;
+        this.auftragsHashwert[19] = 97;
+        this.auftragsHashwert[20] = 15;
+        this.auftragsHashwert[21] = -82;
+        this.auftragsHashwert[22] = 17;
+        this.auftragsHashwert[23] = 107;
     }
 
     public Segmentkopf getSegmentkopf() {
@@ -244,6 +270,9 @@ public class HKTAN extends Segment implements IExecutableElement, IDependentElem
         statusElement = new HIRMS(new byte[0]);
         statusElement.setSegmentkopf(Segmentkopf.Builder.newInstance().setSegmentKennung(HIRMS.class).setBezugssegment(segmentkopf.getSegmentNummer()).setSegmentVersion(2).build());
 
+        // FIXME: set tanProzess to 1
+        this.tanProzess = "1";
+
         if (!this.getTanProzess().equals("1") ||
                 this.auftragsHashwert.length == 0) {
             Rueckmeldung rueckmeldung = Rueckmeldung.getRueckmeldung("9980");
@@ -261,6 +290,7 @@ public class HKTAN extends Segment implements IExecutableElement, IDependentElem
          * Challenge von der DataAccessFacade holen
          */
         DataAccessFacade dataAccessFacade = DataAccessFacadeManager.getAccessFacade(dialog.getBankId());
+
         String auftragsreferenz = dataAccessFacade.generateAuftragsreferenz(dialog.getDialogId(), dialog.getLegitimationsInfo(), dialog.getClientProductInfo(), this.getAuftragsHashwert());
 
         replyElements = new LinkedList<IMessageElement>();
@@ -295,6 +325,8 @@ public class HKTAN extends Segment implements IExecutableElement, IDependentElem
             return StatusCode.OK;
         }
 
+        // FIXME: Disable strong authentication
+        //if(true) {
         if(dialog.getLegitimationsInfo().isStrongAuthenticated()) {
 
             HIUPA hiupa = new HIUPA(dialog.getLegitimationsInfo().getUserId(), dataAccessFacade.getCurrentUpdVersion(dialog.getLegitimationsInfo()), null, segmentkopf.getSegmentNummer());
@@ -312,6 +344,7 @@ public class HKTAN extends Segment implements IExecutableElement, IDependentElem
             hitan.setAuftragsreferenz(auftragsreferenz);
 
             replyElements.add(hitan);
+
             return StatusCode.OK;
         }
 

@@ -1,6 +1,6 @@
 package net.petafuel.fuelifints.cryptography;
 
-import net.petafuel.fuelifints.protocol.fints3.model.SecurityMethod;
+import net.petafuel.fuelifints.protocol.fints3.segments.model.SecurityMethod;
 import org.junit.Test;
 
 import java.security.KeyPair;

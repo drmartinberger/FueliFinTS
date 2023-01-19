@@ -21,21 +21,22 @@
         </repository>
     </repositories>
     <dependencies>
-        <dependency>
-            <groupId>net.petafuel.prepaid.library</groupId>
-            <artifactId>DBUtils</artifactId>
-            <version>1.434</version>
-        </dependency>
-        <dependency>
-            <groupId>net.petafuel.prepaid.library</groupId>
-            <artifactId>Mt94x</artifactId>
-            <version>1.415</version>
-        </dependency>
-        <dependency>
-            <groupId>net.petafuel.library</groupId>
-            <artifactId>JSEPA</artifactId>
-            <version>1.446</version>
-        </dependency>
+<!-- Commented out unavailable dependencies -->
+<!--        <dependency>-->
+<!--            <groupId>net.petafuel.prepaid.library</groupId>-->
+<!--            <artifactId>DBUtils</artifactId>-->
+<!--            <version>1.434</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>net.petafuel.prepaid.library</groupId>-->
+<!--            <artifactId>Mt94x</artifactId>-->
+<!--            <version>1.415</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>net.petafuel.library</groupId>-->
+<!--            <artifactId>JSEPA</artifactId>-->
+<!--            <version>1.446</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-client</artifactId>
@@ -89,7 +90,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.25</version>
+            <version>8.0.31</version>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>

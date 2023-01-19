@@ -32,7 +32,7 @@ public class Payments {
 		pain00100203("sepade.pain.001.002.03.xsd", 0),
 		pain00100303("sepade.pain.001.003.03.xsd", 1);
 
-		private String descriptor;
+		private final String descriptor;
 		private int wert = 0;
 
 		versions(String descriptor, int wert) {
@@ -57,6 +57,7 @@ public class Payments {
 				for (String unterstuetzt : unterstuetzteSepaVersionen) {
 					if (unterstuetzt.contains(version.getDescriptor()) && (maxFound == null || (maxFound.getWert() < version.getWert()))) {
 						maxFound = version;
+						break;
 					}
 				}
 			}
@@ -129,10 +130,10 @@ public class Payments {
 		payment.setPti(paymentTypeInformation);
 		pmtInfos.add(payment);
 
-		CCTInitiation ccInitation = new CCTInitiation();
-		ccInitation.setPmtInfos(pmtInfos);
-		ccInitation.setGrpHeader(groupHeader);
-		d.setCctInitiation(ccInitation);
+		CCTInitiation cctInitiation = new CCTInitiation();
+		cctInitiation.setPmtInfos(pmtInfos);
+		cctInitiation.setGrpHeader(groupHeader);
+		d.setCctInitiation(cctInitiation);
 		return d;
 	}
 
@@ -206,7 +207,7 @@ public class Payments {
 
 	public static class Result {
 		private boolean success = false;
-		private LinkedList<String> ids = new LinkedList<>();
+		private final LinkedList<String> ids = new LinkedList<>();
 		private Throwable error = null;
 
 		public Result(boolean success) {

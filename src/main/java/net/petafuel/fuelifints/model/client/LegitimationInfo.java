@@ -1,6 +1,6 @@
 package net.petafuel.fuelifints.model.client;
 
-import net.petafuel.fuelifints.protocol.fints3.model.SecurityMethod;
+import net.petafuel.fuelifints.protocol.fints3.segments.model.SecurityMethod;
 import net.petafuel.fuelifints.protocol.fints3.segments.deg.Hashalgorithmus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

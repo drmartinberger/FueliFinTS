@@ -1,4 +1,4 @@
-package net.petafuel.fuelifints.protocol.fints3.model;
+package net.petafuel.fuelifints.protocol.fints3.segments.model;
 
 public enum SecurityMethod {
 

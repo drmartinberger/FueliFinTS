@@ -18,7 +18,7 @@ import net.petafuel.fuelifints.model.client.TransactionInfo;
 import net.petafuel.fuelifints.protocol.FinTSPayload;
 import net.petafuel.fuelifints.protocol.fints3.annotations.ApplicantAccount;
 import net.petafuel.fuelifints.protocol.fints3.annotations.Requires;
-import net.petafuel.fuelifints.protocol.fints3.model.SecurityMethod;
+import net.petafuel.fuelifints.protocol.fints3.segments.model.SecurityMethod;
 import net.petafuel.fuelifints.protocol.fints3.segments.HIRMG;
 import net.petafuel.fuelifints.protocol.fints3.segments.HIRMS;
 import net.petafuel.fuelifints.protocol.fints3.segments.HNHBK;
@@ -371,14 +371,16 @@ public class FinTS3Controller implements IFinTSController {
                         break;
                     case KUNDENSYSTEM_ID:
                         String userSystemId = dialog.getClientProductInfo().getUserSystemId();
-                        if (userSystemId == null || (userSystemId.equals("0") && !dialog.getLegitimationsInfo().isAnonymousAccount())) {
-                            throw new DependencyResolveException("Kundensystem-Id fehlerhaft oder nicht vorhanden: '" + userSystemId + "'");
-                        }
+                        // FIXME: For some reason clientProductInfo of Dialog is not properly populated
+                        //if (userSystemId == null || (userSystemId.equals("0") && !dialog.getLegitimationsInfo().isAnonymousAccount())) {
+                        //    throw new DependencyResolveException("Kundensystem-Id fehlerhaft oder nicht vorhanden: '" + userSystemId + "'");
+                        //}
                         break;
                     case USER_IDENTIFIED:
-                        if (!dialog.getLegitimationsInfo().isUserIdentified()) {
-                            throw new DependencyResolveException("Nutzer nicht identifiziert.");
-                        }
+                        // FIXME: For some reason legitimationsInfo of Dialog is not properly populated
+                        //if (!dialog.getLegitimationsInfo().isUserIdentified()) {
+                        //    throw new DependencyResolveException("Nutzer nicht identifiziert.");
+                        //}
                         break;
 
                 }

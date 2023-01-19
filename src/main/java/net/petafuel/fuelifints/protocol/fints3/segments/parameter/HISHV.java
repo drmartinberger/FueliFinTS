@@ -1,6 +1,6 @@
 package net.petafuel.fuelifints.protocol.fints3.segments.parameter;
 
-import net.petafuel.fuelifints.protocol.fints3.model.SecurityMethod;
+import net.petafuel.fuelifints.protocol.fints3.segments.model.SecurityMethod;
 import net.petafuel.fuelifints.protocol.fints3.segments.Element;
 import net.petafuel.fuelifints.protocol.fints3.segments.ElementDescription;
 import net.petafuel.fuelifints.protocol.fints3.segments.Segment;

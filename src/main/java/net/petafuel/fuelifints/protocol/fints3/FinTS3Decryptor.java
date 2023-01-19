@@ -8,7 +8,7 @@ import net.petafuel.fuelifints.exceptions.HBCIValidationException;
 import net.petafuel.fuelifints.model.Dialog;
 import net.petafuel.fuelifints.protocol.FinTSPayload;
 import net.petafuel.fuelifints.protocol.IFinTSDecryptor;
-import net.petafuel.fuelifints.protocol.fints3.model.SecurityMethod;
+import net.petafuel.fuelifints.protocol.fints3.segments.model.SecurityMethod;
 import net.petafuel.fuelifints.protocol.fints3.segments.HNHBK;
 import net.petafuel.fuelifints.protocol.fints3.segments.HNHBS;
 import net.petafuel.fuelifints.protocol.fints3.segments.HNVSD;

@@ -1,6 +1,6 @@
 package net.petafuel.fuelifints.dataaccess;
 
-import net.petafuel.fuelifints.protocol.fints3.model.SecurityMethod;
+import net.petafuel.fuelifints.protocol.fints3.segments.model.SecurityMethod;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

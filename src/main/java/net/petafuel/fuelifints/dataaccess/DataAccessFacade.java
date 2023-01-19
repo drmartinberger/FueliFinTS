@@ -6,7 +6,7 @@ import net.petafuel.fuelifints.model.Dialog;
 import net.petafuel.fuelifints.model.IMessageElement;
 import net.petafuel.fuelifints.model.client.ClientProductInfo;
 import net.petafuel.fuelifints.model.client.LegitimationInfo;
-import net.petafuel.fuelifints.protocol.fints3.model.SecurityMethod;
+import net.petafuel.fuelifints.protocol.fints3.segments.model.SecurityMethod;
 import net.petafuel.fuelifints.protocol.fints3.segments.deg.Betrag;
 import net.petafuel.fuelifints.protocol.fints3.segments.deg.KontoverbindungInternational;
 import net.petafuel.fuelifints.protocol.fints3.segments.deg.KontoverbindungNational;

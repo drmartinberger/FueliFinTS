@@ -4,7 +4,7 @@ import net.petafuel.fuelifints.model.Dialog;
 import net.petafuel.fuelifints.model.IExecutableElement;
 import net.petafuel.fuelifints.model.IMessageElement;
 import net.petafuel.fuelifints.model.client.LegitimationInfo;
-import net.petafuel.fuelifints.protocol.fints3.model.SecurityMethod;
+import net.petafuel.fuelifints.protocol.fints3.segments.model.SecurityMethod;
 import net.petafuel.fuelifints.protocol.fints3.segments.deg.*;
 import net.petafuel.fuelifints.protocol.fints3.validator.validators.an;
 import net.petafuel.fuelifints.protocol.fints3.validator.validators.code;

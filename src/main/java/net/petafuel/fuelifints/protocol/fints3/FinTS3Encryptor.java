@@ -10,7 +10,7 @@ import net.petafuel.fuelifints.model.Message;
 import net.petafuel.fuelifints.model.client.ClientProductInfo;
 import net.petafuel.fuelifints.model.client.LegitimationInfo;
 import net.petafuel.fuelifints.protocol.IFinTSEncryptor;
-import net.petafuel.fuelifints.protocol.fints3.model.SecurityMethod;
+import net.petafuel.fuelifints.protocol.fints3.segments.model.SecurityMethod;
 import net.petafuel.fuelifints.protocol.fints3.segments.AbstractElement;
 import net.petafuel.fuelifints.protocol.fints3.segments.HIRMG;
 import net.petafuel.fuelifints.protocol.fints3.segments.HIRMS;

@@ -10,7 +10,7 @@ import net.petafuel.fuelifints.model.Dialog;
 import net.petafuel.fuelifints.model.IMessageElement;
 import net.petafuel.fuelifints.model.client.ClientProductInfo;
 import net.petafuel.fuelifints.model.client.LegitimationInfo;
-import net.petafuel.fuelifints.protocol.fints3.model.SecurityMethod;
+import net.petafuel.fuelifints.protocol.fints3.segments.model.SecurityMethod;
 import net.petafuel.fuelifints.protocol.fints3.segments.deg.Betrag;
 import net.petafuel.fuelifints.protocol.fints3.segments.deg.KontoverbindungInternational;
 import net.petafuel.fuelifints.protocol.fints3.segments.deg.KontoverbindungNational;
@@ -44,10 +44,10 @@ import static net.petafuel.fuelifints.support.Payments.derfNullSein;
 @SuppressWarnings("unused")
 public class Banking2Access implements DataAccessFacade {
     private static final Logger LOG = LogManager.getLogger(Banking2Access.class);
-    private String bankCode;
+    private final String bankCode;
     private String configColumnSct = "ueberweisung";
     private String configColumnSdd = "sdd";
-    private banking2 database;
+    private final banking2 database;
 
 	/**
 	 * @param configFile Pfad zum Konfigurationsfile
@@ -236,7 +236,7 @@ public class Banking2Access implements DataAccessFacade {
 		String communikationUrlListString = config(banking2.properties.communikationUrls, "");
 		if (!communikationUrlListString.equals("")) {
 			KommunikationsParameterData kommunikationsParameterData = new KommunikationsParameterData();
-			List<String> communikationUrlList = com.mysql.jdbc.StringUtils.split(communikationUrlListString, ",", true);
+			List<String> communikationUrlList = com.mysql.cj.util.StringUtils.split(communikationUrlListString, ",", true);
 			communikationUrlList.forEach(kommunikationsParameterData::addKommunikationszugang);
 			kommunikationsParameterData.setBankId(bankId);
 			return kommunikationsParameterData;
@@ -302,7 +302,7 @@ public class Banking2Access implements DataAccessFacade {
          */
 		if (kontoverbindungAuftraggeber != null) {
 			LOG.debug(addTagUser(format("Kontonummer: %s", kontoverbindungAuftraggeber.getKontonummer()), legitimationsInfo));
-			LOG.debug(addTagUser(format("Kreditinstitutkennung: %s", String.valueOf(kontoverbindungAuftraggeber.getKreditinstitutskennung())), legitimationsInfo));
+			LOG.debug(addTagUser(format("Kreditinstitutkennung: %s", kontoverbindungAuftraggeber.getKreditinstitutskennung()), legitimationsInfo));
 			LOG.debug(addTagUser(format("Unterkontomerkmal: %s", kontoverbindungAuftraggeber.getUnterkontomerkmal()), legitimationsInfo));
 		}
 		LOG.debug(addTagUser(format("Betreff: %s", betreff), legitimationsInfo));
@@ -352,10 +352,13 @@ public class Banking2Access implements DataAccessFacade {
 	 */
 	@Override
 	public int getCurrentUpdVersion(LegitimationInfo legitimationInfo) {
-		if (legitimationInfo.getCustomerId().equals("9999999999")) {
-			return 1;
-		}
-		return database.getLatestUpd(legitimationInfo);
+		// FIXME: customerId is not always set
+		return 1;
+//		String customerId = legitimationInfo.getCustomerId();
+//		if (customerId != null && customerId.equals("9999999999")) {
+//			return 1;
+//		}
+//		return database.getLatestUpd(legitimationInfo);
 	}
 
 	/**
@@ -1121,7 +1124,7 @@ public class Banking2Access implements DataAccessFacade {
 			if (vectorBuchungen == null || (isSammler && vectorBuchungen.size() < 1) || (!isSammler && vectorBuchungen.size() > 1)) {
 				int count = (vectorBuchungen == null) ? 0 : vectorBuchungen.size();
 				String singleSammel = (isSammler) ? "s" : "m";
-				String message = format("Ungültige Menge an CTTInfosegmente gefunden: %s (%s)", String.valueOf(count), singleSammel);
+				String message = format("Ungültige Menge an CTTInfosegmente gefunden: %s (%s)", count, singleSammel);
 				LOG.warn(addTagUser(message, legitimationInfo));
 				return new ReturnDataObject(false, message, "9930");
 			}
@@ -1175,10 +1178,10 @@ public class Banking2Access implements DataAccessFacade {
 						executionTime = sdf.parse(regExDate);
 						long dd = daysDiff(new Date(), executionTime);
 						if (dd < 1) {
-							LOG.warn(addTagUser(format("Datum liegt nicht in der Zukunft, Tage: %s", String.valueOf(dd)), legitimationInfo));
+							LOG.warn(addTagUser(format("Datum liegt nicht in der Zukunft, Tage: %s", dd), legitimationInfo));
 							return new ReturnDataObject(false, "Datum für die Ausführung muss mindestens ein Tag in der Zukunft liegen", "9935");
 						}
-						LOG.info(addTagUser(format("Tage-Diff: %s", String.valueOf(dd)), legitimationInfo));
+						LOG.info(addTagUser(format("Tage-Diff: %s", dd), legitimationInfo));
 					} catch (ParseException e) {
 						LOG.error(addTagUser(format("Datum für die Ausführung fehlt oder ist Fehlerhaft: %s", e.getMessage()), legitimationInfo), e);
 						return new ReturnDataObject(false, "Datum für die Ausführung fehlt oder ist Fehlerhaft", "9935");

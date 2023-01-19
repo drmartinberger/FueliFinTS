@@ -1,8 +1,12 @@
 db.jdbcurl.12345678=jdbc:mysql://yourdbserver:3306/yourbankdb?characterEncoding=ISO-8859-1
+db.server.12345678=dbserver
+db.name.12345678=fints
 db.user.12345678=dbuser
 db.password.12345678=dbpassword
 
 db.jdbcurl.23456789=jdbc:mysql://anotherdbserver:3306/anotherbankdb?characterEncoding=ISO-8859-1
+db.server.23456789=otherdbserver
+db.name.23456789=otherdbname
 db.user.23456789=otherdbuser
 db.password.23456789=otherdbpassword
 

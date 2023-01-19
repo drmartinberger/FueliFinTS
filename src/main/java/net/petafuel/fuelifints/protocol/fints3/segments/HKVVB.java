@@ -10,7 +10,7 @@ import net.petafuel.fuelifints.model.Dialog;
 import net.petafuel.fuelifints.model.IExecutableElement;
 import net.petafuel.fuelifints.model.IMessageElement;
 import net.petafuel.fuelifints.model.client.ClientProductInfo;
-import net.petafuel.fuelifints.protocol.fints3.model.SecurityMethod;
+import net.petafuel.fuelifints.protocol.fints3.segments.model.SecurityMethod;
 import net.petafuel.fuelifints.protocol.fints3.segments.deg.Rueckmeldung;
 import net.petafuel.fuelifints.protocol.fints3.segments.deg.Segmentkopf;
 import net.petafuel.fuelifints.protocol.fints3.segments.parameter.*;

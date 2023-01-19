@@ -7,20 +7,14 @@ import net.petafuel.fuelifints.model.Dialog;
 import net.petafuel.fuelifints.model.IDependentElement;
 import net.petafuel.fuelifints.model.IExecutableElement;
 import net.petafuel.fuelifints.model.IMessageElement;
-import net.petafuel.fuelifints.model.client.TransactionInfo;
 import net.petafuel.fuelifints.protocol.fints3.annotations.ApplicantAccount;
 import net.petafuel.fuelifints.protocol.fints3.annotations.Requires;
-import net.petafuel.fuelifints.protocol.fints3.model.SecurityMethod;
 import net.petafuel.fuelifints.protocol.fints3.segments.deg.KontoverbindungInternational;
 import net.petafuel.fuelifints.protocol.fints3.segments.deg.Rueckmeldung;
 import net.petafuel.fuelifints.protocol.fints3.segments.deg.Segmentkopf;
 import net.petafuel.fuelifints.protocol.fints3.validator.validators.an;
 import net.petafuel.fuelifints.protocol.fints3.validator.validators.bin;
-import org.bouncycastle.jce.provider.JDKMessageDigest;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.List;
 
 /**

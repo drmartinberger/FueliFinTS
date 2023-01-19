@@ -4,7 +4,7 @@ import net.petafuel.fuelifints.dataaccess.dataobjects.ReturnDataObject;
 import net.petafuel.fuelifints.exceptions.ElementParseException;
 import net.petafuel.fuelifints.exceptions.HBCISyntaxException;
 import net.petafuel.fuelifints.model.Dialog;
-import net.petafuel.fuelifints.protocol.fints3.model.SecurityMethod;
+import net.petafuel.fuelifints.protocol.fints3.segments.model.SecurityMethod;
 import net.petafuel.fuelifints.protocol.fints3.segments.HKSAK;
 import net.petafuel.fuelifints.protocol.fints3.segments.HNSHA;
 import net.petafuel.fuelifints.protocol.fints3.segments.HNSHK;

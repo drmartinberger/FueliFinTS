@@ -4,7 +4,7 @@ import net.petafuel.fuelifints.cryptography.KeyManager;
 import net.petafuel.fuelifints.model.Dialog;
 import net.petafuel.fuelifints.model.IExecutableElement;
 import net.petafuel.fuelifints.model.IMessageElement;
-import net.petafuel.fuelifints.protocol.fints3.model.SecurityMethod;
+import net.petafuel.fuelifints.protocol.fints3.segments.model.SecurityMethod;
 import net.petafuel.fuelifints.protocol.fints3.segments.deg.OeffentlicherSchluessel;
 import net.petafuel.fuelifints.protocol.fints3.segments.deg.Schluesselname;
 import net.petafuel.fuelifints.protocol.fints3.segments.deg.Segmentkopf;

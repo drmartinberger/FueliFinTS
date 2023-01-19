@@ -2,7 +2,7 @@ package net.petafuel.fuelifints.cryptography;
 
 import net.petafuel.fuelifints.dataaccess.DummyAccessFacade;
 import net.petafuel.fuelifints.model.Dialog;
-import net.petafuel.fuelifints.protocol.fints3.model.SecurityMethod;
+import net.petafuel.fuelifints.protocol.fints3.segments.model.SecurityMethod;
 import net.petafuel.fuelifints.protocol.fints3.segments.HNSHA;
 import net.petafuel.fuelifints.protocol.fints3.segments.HNSHK;
 import org.bouncycastle.crypto.digests.SHA256Digest;

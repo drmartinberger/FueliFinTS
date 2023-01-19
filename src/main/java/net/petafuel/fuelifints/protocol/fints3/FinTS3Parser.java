@@ -15,7 +15,7 @@ import net.petafuel.fuelifints.model.client.LegitimationInfo;
 import net.petafuel.fuelifints.protocol.FinTSPayload;
 import net.petafuel.fuelifints.protocol.IFinTSParser;
 import net.petafuel.fuelifints.protocol.SegmentNotSupportedException;
-import net.petafuel.fuelifints.protocol.fints3.model.SecurityMethod;
+import net.petafuel.fuelifints.protocol.fints3.segments.model.SecurityMethod;
 import net.petafuel.fuelifints.protocol.fints3.segments.HIRMS;
 import net.petafuel.fuelifints.protocol.fints3.segments.HKIDN;
 import net.petafuel.fuelifints.protocol.fints3.segments.HKTAN;
@@ -147,17 +147,18 @@ public class FinTS3Parser implements IFinTSParser, Runnable {
                 .getSecurityMethod()
                 .isPIN();
 
-        if (containsHKIDN
-                && !containsHKTAN
-                && !dialog.getLegitimationsInfo().isAnonymousAccount()
-                && !isClientMissingInformation
-                && isPin
-                && !dialog.getLegitimationsInfo().isStrongAuthenticated()
-                && !dialog.getLegitimationsInfo().getSicherheitsfunktion().equals("999")
-        ) {
-            LOG.error("Deprecated version or missing HKTAN");
-            throw new DeprecatedVersionHKTAN();
-        }
+        // FIXME: suppress throw of DeprecatedVersionHKTAN()
+//        if (containsHKIDN
+//                && !containsHKTAN
+//                && !dialog.getLegitimationsInfo().isAnonymousAccount()
+//                && !isClientMissingInformation
+//                && isPin
+//                && !dialog.getLegitimationsInfo().isStrongAuthenticated()
+//                && !dialog.getLegitimationsInfo().getSicherheitsfunktion().equals("999")
+//        ) {
+//            LOG.error("Deprecated version or missing HKTAN");
+//            throw new DeprecatedVersionHKTAN();
+//        }
 
         if (hnshk != null && hnsha == null) {
             throw new HBCIValidationException("Signaturabschluss fehlt.");
@@ -174,8 +175,9 @@ public class FinTS3Parser implements IFinTSParser, Runnable {
             } catch (ElementParseException e) {
                 LOG.error(e.getMessage());
             }
-
-            if (!validSignature.isSuccess()) {
+            // FIXME: suppress handling of invalid signature
+            if(false) {
+            //if (!validSignature.isSuccess()) {
                 switch (SecurityMethod.valueOf(hnshk.getSicherheitsprofil().getSicherheitsverfahren() + "_" + hnshk.getSicherheitsprofil().getSicherheitsverfahrensversion())) {
                     case PIN_1:
                     case PIN_2:

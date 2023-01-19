@@ -4,7 +4,7 @@ import net.petafuel.fuelifints.communication.FinTSCommunicationHandler;
 import net.petafuel.fuelifints.model.client.ClientProductInfo;
 import net.petafuel.fuelifints.model.client.LegitimationInfo;
 import net.petafuel.fuelifints.model.client.TransactionInfo;
-import net.petafuel.fuelifints.protocol.fints3.model.SecurityMethod;
+import net.petafuel.fuelifints.protocol.fints3.segments.model.SecurityMethod;
 import net.petafuel.fuelifints.protocol.fints3.segments.deg.Hashalgorithmus;
 
 import java.math.BigInteger;
