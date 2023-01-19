@@ -9,7 +9,7 @@ Fueli FinTS is a server implementing the financial transaction services (FinTS) 
 4. Added example configuration files and db script to set up a rudimentary database.
 5. Some minor refactoring and cleanups
 
-**Please find a complete list of all changes to the original implementation by this fork with this [Github Compare](https://github.com/drmartinberger/FueliFinTS/compare/main...petafuel:main) view.**
+**Please find a complete list of all changes to the original implementation by this fork with this [Github Compare](https://github.com/petafuel/FueliFinTS/compare/main...drmartinberger:main) view.**
 
 # Setup Steps
 
