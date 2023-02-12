@@ -1,0 +1,4 @@
+lnbitsUrl = <url to LNBits instance>
+uriWallet = /api/v1/wallet
+uriPayments = /api/v1/payments
+xApiKey = <x-api-key of LNBits wallet>

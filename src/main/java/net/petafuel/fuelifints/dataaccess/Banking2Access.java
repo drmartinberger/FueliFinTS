@@ -20,6 +20,7 @@ import net.petafuel.jsepa.exception.SEPAParsingException;
 import net.petafuel.jsepa.model.*;
 import net.petafuel.jsepa.util.BankDateCalculator;
 import net.petafuel.jsepa.util.SepaUtils;
+import net.petafuel.mt94x.Mt940Helper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -1311,7 +1312,11 @@ public class Banking2Access implements DataAccessFacade {
 	 */
 	@Override
 	public byte[] getGebuchteUmsaetze(String kontonummer, Date vonDatum, Date bisDatum, LegitimationInfo legitimationsInfo) {
-		return database.getGebuchteUmsaetze(kontonummer, vonDatum, bisDatum, legitimationsInfo);
+		try {
+			return Mt940Helper.getMT940s(kontonummer, vonDatum, bisDatum);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**

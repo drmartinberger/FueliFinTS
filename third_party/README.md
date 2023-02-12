@@ -1,6 +1,6 @@
 # Third Party Licenses
 
-Fueli FinTS is build on top of other open source projects. Their licence files are included in the source code's 'third_party' folder. The third party software included and/or used by Fueli FinTS is: (in alphabetical order)
+This fork of Fueli FinTS is build on top of other open source projects. Their licence files are included in the source code's 'third_party' folder. The third party software included and/or used by Fueli FinTS is: (in alphabetical order)
 
 - Apache Commons Lang  
   Copyright 2001-2021 The Apache Software Foundation  
@@ -58,27 +58,32 @@ Fueli FinTS is build on top of other open source projects. Their licence files a
 - MySQL Connector/J  
   Copyright (c) 1998, 2021 Oracle and/or its affiliates.  
   GNU General Public License Version 2.0  
-  https://dev.mysql.com/doc/connector-j/5.1/en/
+  https://dev.mysql.com/doc/connector-j/8.0/en/
 
 - OWASP Dependency-Check  
   Copyright (c) 2012-2021 Jeremy Long. All Rights Reserved.  
   Apache-2.0 License  
   https://owasp.org/www-project-dependency-check/
 
-- petaFuel DBUtils  
-  Copyright 2021 petaFuel GmbH  
-  DBUtils Software License Agreement  
-  https://github.com/petafuel
+# The following commented libraries are no longer publicly available:
+[//]: # (- petaFuel DBUtils  )
+[//]: # (  Copyright 2021 petaFuel GmbH  )
+[//]: # (  DBUtils Software License Agreement  )
+[//]: # (  https://github.com/petafuel)
+[//]: # ()
+[//]: # (- petaFuel JSEPA  )
+[//]: # (  Copyright 2021 petaFuel GmbH  )
+[//]: # (  JSEPA Software License Agreement  )
+[//]: # (  https://github.com/petafuel)
+[//]: # ()
+[//]: # (- petaFuel Mt94x  )
+[//]: # (  Copyright 2021 petaFuel GmbH  )
+[//]: # (  Mt94x Software License Agreement  )
+[//]: # (  https://github.com/petafuel)
 
-- petaFuel JSEPA  
-  Copyright 2021 petaFuel GmbH  
-  JSEPA Software License Agreement  
-  https://github.com/petafuel
-
-- petaFuel Mt94x  
-  Copyright 2021 petaFuel GmbH  
-  Mt94x Software License Agreement  
-  https://github.com/petafuel
+- Prowide Core  
+  Apache-2.0 License  
+  https://www.prowidesoftware.com/products/core
 
 - RESTEasy  
   Apache-2.0 License  
