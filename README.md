@@ -1,7 +1,7 @@
-# Fork of [FueliFinTS](https://github.com/petafuel/FueliFinTS)
+# LN-FinTS - A fork of [FueliFinTS](https://github.com/petafuel/FueliFinTS)
 Fueli FinTS is a server implementing the financial transaction services (FinTS) protocol for online banking. FinTS was formerly known as home banking computer interface (HBCI).
 
-**This fork of [FueliFinTS](https://github.com/petafuel/FueliFinTS) addresses the following issues:**
+**This is a fork of [FueliFinTS](https://github.com/petafuel/FueliFinTS) addresses the following issues:**
 
 1. Persistence layer was missing and has been added after rough reverse-engineering
 2. For missing maven dependencies (to handle SEPA payments and account statements) skeleton classes have been implemented and added.
@@ -30,3 +30,12 @@ Fueli FinTS is a server implementing the financial transaction services (FinTS) 
       ```bash
       $ mysql -u fintsuser -p <password> fints < dbsetup.sql
       ``` 
+7. Configure `lnbits.properties`
+
+# Run Steps
+
+Use `LN-FinTS-jar-with-dependencies.jar` (containing all needed dependencies) resulting from `mvn package` in a folder where there is a folder `config` with the files `fuelifints.properties` and `lnbits.properties` with the following command:
+```bash
+$ java -jar LN-FinTS-jar-with-dependencies.jar
+```
+Logs are written into folder `log`.
