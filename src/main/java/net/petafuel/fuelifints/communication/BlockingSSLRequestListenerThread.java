@@ -66,7 +66,7 @@ public class BlockingSSLRequestListenerThread extends Thread {
             properties.load(bis);
             bis.close();
             systemProps.put("javax.net.ssl.keyStore", properties.getProperty("keystore_location"));
-            systemProps.put("javax.net.ssl.keyStorePassword", properties.getProperty("keysotre_password"));
+            systemProps.put("javax.net.ssl.keyStorePassword", properties.getProperty("keystore_password"));
             useCipherSuites = properties.getProperty("use_cipher_suites").split(";");
             useProtocols = properties.getProperty("use_protocols").split(";");
         } catch (Exception e) {

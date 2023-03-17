@@ -14,6 +14,11 @@ import java.util.Properties;
 public class AESUtil {
     private static final Logger LOG = LogManager.getLogger(AESUtil.class);
 
+    public static void main (String[] args) {
+        System.out.println(aesEncrypt(args[0].getBytes()));
+        System.exit(0);
+    }
+
        /**
         * Expects a  payload to encrypt and returns the encryption result as Base64
         * @param toEncrypt

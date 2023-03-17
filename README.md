@@ -8,17 +8,25 @@ Fueli FinTS is a server implementing the financial transaction services (FinTS) 
 3. FIXMEs to deactivate PIN/mTAN/strong authentication where necessary for testing purposes. **CAUTION: Do not use this fork in production without fixing these issues!!!**
 4. Added example configuration files and db script to set up a rudimentary database.
 5. Some minor refactoring and cleanups
+6. Adapted for Bitcoin Lightning Network integration with [LNbits](https://github.com/lnbits/lnbits#lnbits)
 
 **Please find a complete list of all changes to the original implementation by this fork with this [Github Compare](https://github.com/petafuel/FueliFinTS/compare/main...drmartinberger:lnbits-via-mt940) view.**
 
 # Setup Steps
 
-1. Configure `fuelifints.properties` 
-2. Initialize keystore (to be set in `fuelifints.properties`)
-3. Setup `FinTS_Produktregistrierungen_Lizenzdatei.csv` (to be set in `fuelifints.properties`, contains product client ids that are allowed to communicate with server) or set a `productinfo.csv.check=false` 
-4. Define aeskey.properties with a valid 128-bit key (to be set in `fuelifints.properties`)
-5. Setup file <blz>.banking2.properties (to set config params for persistence layer, blz is configured in `fuelifints.properties` and your database)
-6. Init database:
+1. Configure `config/fuelifints.properties` 
+2. Initialize keystore (to be set in `config/fuelifints.properties`)
+3. Setup `FinTS_Produktregistrierungen_Lizenzdatei.csv` (to be set in `config/fuelifints.properties`, contains product client ids that are allowed to communicate with server) or set a `productinfo.csv.check=false` 
+4. Setup `aeskey.properties` with a valid 128-bit key (file to be set in `config/fuelifints.properties`)
+5. Setup file `config/12345678.banking2.properties` (to set config params for persistence layer, `bankcode = 12345678` is configured in `config/fuelifints.properties` and your database)
+6. Derive encrypted PIN (for FinTS access) for your intended `<your-pin>, e.g. 123456789` and inject it into `dbsetup.sql`:
+
+```bash
+$ encryptedPIN=`mvn compile exec:java -Dexec.mainClass="net.petafuel.fuelifints.cryptography.aesencryption.AESUtil" -Dexec.args="<your-pin>" -q`
+$ sed -i -e "s/REPLACE_ENCRYPTED_PIN/$encryptedPIN/g" dbsetup.sql
+```
+
+7. Init database:
    1. Install mysql
    2. Initialize database from mysql command line:
       1. Add database user e.g. `fintsuser` with `<password>` (both must be used in `connectionpool.properties` adapted from `connectionpool.properties.example`):
