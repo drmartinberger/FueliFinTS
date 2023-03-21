@@ -1,12 +1,14 @@
--- Rough reverse-engineered database structure for FueliFinTS
--- 1. To set your intended benutzerkennung(=FinTS user), change value 'fintsUser'
--- 2. To set your intended encrypted PIN(=encrypted FinTS PIN), change value '$encryptedPIN' with outcome of
---    mvn compile exec:java -Dexec.mainClass="net.petafuel.fuelifints.cryptography.aesencryption.AESUtil" -Dexec.args="<your-intended-pin>" -q
---    (!!!ATTENTION!!!: before encrypting PIN, aes_key (128) needs to be set in aeskey.properties in hex format, e.g. aes_key=770A8A65DA156D24EE2A093277530142)
--- 3. To set your intended kundenid, change value 'kundenid1'
--- 4. To set your intended BLZ and Bankname, change values '12345678' and 'LNBank' (as in config/fuelifints.properties)
--- 5. To set your intended kontoid, kontonummer and kontoinhaber, change values 'kontoid1', '666666' and 'kontoinhaber1'
--- 6. Set other values where feasible
+/*
+Rough reverse-engineered database structure for FueliFinTS
+1. To set your intended benutzerkennung(=FinTS user), change value 'fintsUser'
+2. To set your intended encrypted PIN(=encrypted FinTS PIN), change value '$encryptedPIN' with outcome of
+    mvn compile exec:java -Dexec.mainClass="net.petafuel.fuelifints.cryptography.aesencryption.AESUtil" -Dexec.args="<your-intended-pin>" -q
+    (!!!ATTENTION!!!: before encrypting PIN, aes_key (128) needs to be set in aeskey.properties in hex format, e.g. aes_key=770A8A65DA156D24EE2A093277530142)
+3. To set your intended kundenid, change value 'kundenid1'
+4. To set your intended BLZ and Bankname, change values '12345678' and 'LNBank' (as in config/fuelifints.properties)
+5. To set your intended kontoid, kontonummer and kontoinhaber, change values 'kontoid1', '666666' and 'kontoinhaber1'
+6. Set other values where feasible
+*/
 CREATE TABLE benutzerkennungen (pin varchar(255), lastnn varchar(255), benutzerkennung varchar(255));
 INSERT INTO benutzerkennungen (pin, lastnn, benutzerkennung) VALUES ('REPLACE_ENCRYPTED_PIN', 'lastnn', 'fintsUser');
 CREATE TABLE kunden_benutzerkennungen (kundenid varchar(255), benutzerkennung varchar(255));
@@ -22,7 +24,7 @@ CREATE TABLE konten(kontoid VARCHAR(255), kontonummer VARCHAR(255), kontoinhaber
 INSERT INTO konten(kontoid, kontonummer, kontoinhaber, kontostand, tagesumsatz,tageslimit,kontoart,virtkontostand,kreditlinie_aktiv,kreditlinie,ueberziehen,konto_pre,blz_pre,iban_pre,empfaenger_pre) VALUES ('kontoid1','666666', 'kontoinhaber1','0.00','0.00','0.00', '90','0.00',true,'0.00',true,'','','','');
 CREATE TABLE konten_bewegungen(kontoid VARCHAR(255), kontostand VARCHAR(35), buchungsdatum DATE, bewegungsid BIGINT(20));
 -- comment out INSERT INTO konten_bewegungen, if you do not want to have account transactions
---INSERT INTO konten_bewegungen(kontoid, kontostand, buchungsdatum, bewegungsid) VALUES ('kontoid1', '66.66', '2022-11-11', 1);
+-- INSERT INTO konten_bewegungen(kontoid, kontostand, buchungsdatum, bewegungsid) VALUES ('kontoid1', '66.66', '2022-11-11', 1);
 CREATE TABLE kunden_konten(kontoid VARCHAR(255), kundenid VARCHAR(255));
 INSERT INTO kunden_konten(kontoid, kundenid) VALUES ('kontoid1', 'kundenid1');
 CREATE TABLE login_konten_permission(kontoid VARCHAR(255), benutzerkennung varchar(255), ueberweisung VARCHAR(1), sdd VARCHAR(1), ade VARCHAR(1), azv VARCHAR(1), lastschrift VARCHAR(1), abbuchung VARCHAR(1), dtaus VARCHAR(1));
