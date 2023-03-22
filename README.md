@@ -32,7 +32,7 @@ $ sed -i -e "s/REPLACE_ENCRYPTED_PIN/$encryptedPIN/g" dbsetup.sql
       1. Add database user e.g. `fintsuser` with `<password>` (both must be used in `connectionpool.properties` adapted from `connectionpool.properties.example`):
         `mysql> GRANT ALL PRIVILEGES ON *.* TO 'fintsuser'@'localhost' IDENTIFIED BY '<password>';`
       2. `mysql> create database fints;`
-      3. `mysql> GRANT ALL ON fints.* TO 'fintsuser'@'localhost';` 
+      3. `mysql> GRANT ALL PRIVILEGES ON fints.* TO 'fintsuser'@'localhost';` 
       4. `mysql> FLUSH PRIVILEGES;`
       5. Execute database setup script from terminal
       ```bash
