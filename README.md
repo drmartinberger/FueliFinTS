@@ -1,4 +1,4 @@
-# LN-FinTS - A fork of [FueliFinTS](https://github.com/petafuel/FueliFinTS)
+# LN-FinTS - A fork of [FueliFinTS](https://github.com/petafuel/FueliFinTS) to use FinTS for a Bitcoin Lightning node with [LNbits](https://github.com/lnbits/lnbits)
 Fueli FinTS is a server implementing the financial transaction services (FinTS) protocol for online banking. FinTS was formerly known as home banking computer interface (HBCI).
 
 **This is a fork of [FueliFinTS](https://github.com/petafuel/FueliFinTS) addresses the following issues:**
@@ -10,7 +10,7 @@ Fueli FinTS is a server implementing the financial transaction services (FinTS) 
 5. Some minor refactoring and cleanups
 6. Adapted for Bitcoin Lightning Network integration with [LNbits](https://github.com/lnbits/lnbits#lnbits)
 
-**Please find a complete list of all changes to the original implementation by this fork with this [Github Compare](https://github.com/petafuel/FueliFinTS/compare/main...drmartinberger:lnbits-via-mt940) view.**
+**Please find a complete list of all changes to the original implementation by this fork with this [Github Compare](https://github.com/petafuel/FueliFinTS/compare/main...drmartinberger:main) view.**
 
 # Setup Steps
 
