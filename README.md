@@ -17,7 +17,16 @@ Fueli FinTS is a server implementing the financial transaction services (FinTS) 
 1. Configure `config/fuelifints.properties` 
 2. Initialize keystore (to be set in `config/fuelifints.properties`)
 3. Setup `FinTS_Produktregistrierungen_Lizenzdatei.csv` (to be set in `config/fuelifints.properties`, contains product client ids that are allowed to communicate with server) or set a `productinfo.csv.check=false` 
-4. Setup `aeskey.properties` with a valid 128-bit key (file to be set in `config/fuelifints.properties`)
+4. Setup `aeskey.properties` with a valid 128-bit key (file to be set in `config/fuelifints.properties`). For example, the following way:
+
+```bash
+$ openssl rand -hex 12 > aeskey.secret
+$ openssl enc -aes-128-cbc -kfile aeskey.secret -P -md sha1 | grep "key=" > aeskey.tmp
+$ sed -i "s/key/aes_key/g" aeskey.tmp
+$ tr -d '\n' < aeskey.tmp > aeskey.properties
+$ rm aeskey.tmp
+```
+
 5. Setup file `config/12345678.banking2.properties` (to set config params for persistence layer, `bankcode = 12345678` is configured in `config/fuelifints.properties` and your database)
 6. Derive encrypted PIN (for FinTS access) for your intended `<your-pin>, e.g. 123456789` and inject it into `dbsetup.sql`:
 
@@ -38,7 +47,7 @@ $ sed -i -e "s/REPLACE_ENCRYPTED_PIN/$encryptedPIN/g" dbsetup.sql
       ```bash
       $ mysql -u fintsuser -p <password> fints < dbsetup.sql
       ``` 
-7. Configure `lnbits.properties`
+8. Configure `lnbits.properties`
 
 # Run Steps
 
